@@ -1,0 +1,13 @@
+str.split(" ");
+
+str.toUpperCase();
+
+Character.toUpperCase(ch);
+
+In Linked List while insertion at tail use single pointer rather than double
+
+printing a string rather than array can lead to TLE.
+
+StringBuilder can be used when the string is not fixed
+
+It can also reverse a string
