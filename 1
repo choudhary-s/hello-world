@@ -1,0 +1,101 @@
+/**ID: sinbadc1
+LANG: JAVA
+TASK: beads
+*/
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+public class beads
+{
+    public static void main(String args[])throws IOException{
+        BufferedReader br=new BufferedReader(new FileReader("beads.in"));
+        PrintWriter out=new PrintWriter(new BufferedWriter(new FileWriter("beads.out")));
+        int n=Integer.parseInt(br.readLine());
+        String str=br.readLine();
+        String s=str+str;
+        int max=-1;
+        String rs1="", rs2="";
+        int c1=0, c2=0;
+        for(int i=1;i<s.length();i++){
+            
+            String s1=s.substring(0, i);
+            String s2=s.substring(i);
+            //System.out.println(s1+"*"+s2);
+            int l1=s1.length();
+            int l2=s2.length();
+            int count1=0;
+            int count2=0;
+            int set1=-1;
+            if(s1.charAt(l1-1)=='w'){
+                set1=0;
+            }
+            else if(s1.charAt(l1-1)=='r'){
+                set1=1;
+            }
+            else{
+                set1=2;
+            }
+            for(int j=l1-2;j>=0;j--){
+                int curr=-1;
+                if(s1.charAt(j)=='w'){
+                    curr=0;
+                }
+                else if(s1.charAt(j)=='r'){
+                    curr=1;
+                }
+                else{
+                    curr=2;
+                }
+                if((set1==1 && curr==2) || (set1==2 && curr==1))
+                    break;
+                count1++;
+                if(set1==0 && curr!=0)
+                    set1=curr;
+            }
+            int set2=-1;
+            if(s2.charAt(0)=='w'){
+                set2=0;
+            }
+            else if(s2.charAt(0)=='r'){
+                set2=1;
+            }
+            else{
+                set2=2;
+            }
+            for(int j=1;j<l2;j++){
+                int curr=-1;
+                if(s2.charAt(j)=='w'){
+                    curr=0;
+                }
+                else if(s2.charAt(j)=='r'){
+                    curr=1;
+                }
+                else{
+                    curr=2;
+                }
+                if((set2==1 && curr==2) || (set2==2 && curr==1))
+                    break;
+                count2++;
+                if(set2==0 && curr!=0)
+                    set2=curr;
+            }
+            if(max<(count1+count2+2)){
+                max=count1+count2+2;
+                rs1=s1;
+                rs2=s2;
+                c1=count1;
+                c2=count2;
+            }
+        }
+	if(max>n)
+		out.println(n);
+	else
+        	out.println(max);
+        out.close();
+    }
+}
+        
